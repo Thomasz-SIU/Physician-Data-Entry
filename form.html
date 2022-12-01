@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Patient Data Input</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+
+	function validate_form()
+		{
+			let height = document.forms["my_form"]["height"].value;
+			let weight = document.forms["my_form"]["weight"].value;
+            let age = document.forms["my_form"]["age"].value;
+
+            var height_check = /^\(?([0-9]{2})\)?$/;
+			      var weight_check = /^\(?([0-9]{3})\)?$/;
+            var weight_check2 = /^\(?([0-9]{2})\)?$/;
+            var age_check1 = /^\(?([0-9]{1})\)?$/;
+            var age_check2 = /^\(?([0-9]{2})\)?$/;
+            var age_check3 = /^\(?([0-9]{3})\)?$/;
+			
+			if (!height.match(height_check)) 
+			{
+				alert("A valid height must be entered in inches. (Examply: 65)");
+				return false;	
+			}
+			else if (!weight.match(weight_check) && !weight.match(weight_check2))
+			{
+				alert("Invalid weight in integers must be entered. (Example: 150)");
+				return false;		
+			}
+			else if (!age.match(age_check2) && !age.match(age_check1) && !age.match(age_check3))
+			{
+				alert("An age must be entered.  (Example: 35)");
+				return false;	
+			}
+			else	
+			{
+				document.getElementById("thanks").innerHTML = "Thank you for your time!";
+        alert("Thank you!");
+				
+				const options = {
+					method: 'POST',
+					headers: 
+					{
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				};
+				fetch('/api', options);
+
+
+				return false;
+			}
+}
+
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+form { margin: 0 auto; }
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="form.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Input</a>
+    <a href="results.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Results</a>
+    <a href="login.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
+    
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="form.html" class="w3-bar-item w3-button w3-padding-large">Input</a>
+    <a href="results.html" class="w3-bar-item w3-button w3-padding-large">Results</a>
+    <a href="login.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
+
+    
+  </div>
+
+<!-- Header -->
+<header class="w3-container w3-red w3-center" style="padding:50px 16px">
+  <h1 class="w3-margin w3-jumbo">Patient Data Entry</h1>
+
+</header>
+
+<!-- First Grid -->
+
+<div class="container">
+
+<form name="my_form"
+    class="well form-horizontal"
+    onsubmit="return validate_form()" 
+    action="localhost:4000" 
+    method="POST"  
+    id="contact_form">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Patient Data</legend>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Height</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="height" placeholder="inches" class="form-control"  type="text">
+    </div>
+</div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Weight</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="weight" placeholder="lb" class="form-control"  type="text">
+    </div>
+</div>
+</div>
+
+<!-- Age input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Age</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="age" placeholder="years" class="form-control"  type="text">
+    </div>
+</div>
+</div>
+
+<!-- Sex input-->
+ <div class="form-group">
+ <label class="col-md-4 control-label">Sex</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label>
+                         <input type="radio" name="sex" value="Male" required/> Male
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="sex" value="female" /> Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+<!-- Medication Check -->
+ <div class="form-group">
+ <label class="col-md-4 control-label">Has the patient had a DUI before?</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label>
+                         <input type="radio" name="medHist" value="yes" required/> Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="medHist" value="no" /> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+<!-- DUI Check -->
+ <div class="form-group">
+ <label class="col-md-4 control-label">Has anyone in the patient's family had a DUI?</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label>
+                         <input type="radio" name="famHist" value="yes" required/> Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="famHist" value="no" /> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <input type="submit" value="Submit">
+  <label class="col-md-4 control-label"></label>
+  
+    <input type="reset" value="Reset">
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+    </div><!-- /.container -->
+	<br><h1 class = "yellowgreen-background" id="thanks"></h1><br>	
+
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity">  
+  <div class="w3-xlarge w3-padding-32">
+    
+ </div>
+ <p> <a href="" target="_blank"></a></p>
+</footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
+</html>
